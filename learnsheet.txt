@@ -1,0 +1,114 @@
+Day 1 -> 2: 05/10/2021 -> 06/10/2021
+
+    STEP 1:
+        -Lire docs Nextjs + tailwind + styled-components
+
+    STEP 1 Completed 
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME: ?
+
+Stopping time: 06/10/2021   ?
+
+
+
+Day 3: 06/10/2021           15h30
+
+    STEP 2:
+        -Installer environnement de travail nextjs + tailwind + styled-components
+
+    STEP 2 Completed 
+
+    STEP 3:
+        -Créer premier bouton configurable
+
+    STEP 3 Completed
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME: 2H50M
+
+Stopping time: 07/10/2021   01h00
+
+
+
+Day 4: 07/10/2021           22h10
+
+    STEP 4:
+        -Créer un fichier mock-data
+
+    STEP 4 Completed
+
+    STEP 5:
+        -Créer un tableau dynamique
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME: 1H36M
+
+Stopping time: 07/10/2021   23h59
+
+
+
+Day 5: 08/10/2021           14h30
+
+    STEP 5 IN PROGRESS
+    
+    STEP 5 Completed
+
+    STEP 6:
+        -Remplit automatiquement les colonnes, reconnait leur type et peut faire un tri ascendant ou descendant
+
+    STEP 6 Completed
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME: 6H06M
+
+Stopping time: 09/10/2021 4h51
+
+
+
+
+
+
+
+
+
+
+
+/// TODO:
+
+        -Lire docs Nextjs + tailwind + styled-components
+        -Installer environnement de travail nextjs + tailwind + styled-components
+        -Créer premier bouton configurable
+        -Créer un fichier mock-data
+        -Créer un tableau dynamique
+        -Remplit automatiquement les colonnes, reconnait leur type et peut faire un tri ascendant ou descendant 
+
+///
+
+
+
+
+
+
+REFERENCES:
+    *

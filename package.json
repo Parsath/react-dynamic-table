@@ -6,13 +6,17 @@
     "start": "next start"
   },
   "dependencies": {
+    "babel-plugin-macros": "^3.1.0",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
+    "babel-plugin-styled-components": "^1.13.2",
     "postcss": "^8.3.5",
+    "tailwind-styled-components": "^2.0.3",
     "tailwindcss": "^2.2.4"
   }
 }
