@@ -21,10 +21,12 @@ const getTitles = () => {
 
 const useFilter = () => {
     const [data, setData] = useState([]);
+    const [dataCopy, setDataCopy] = useState([]);
     const [headersData, setHeadersData] = useState([]);
 
     useEffect(() => {
         setData(table);
+        setDataCopy(table);
         setHeadersData(getTitles());
         return () => {
         }
@@ -107,7 +109,9 @@ const useFilter = () => {
     const searchFor = (title, value) => {
         headersData.forEach((elem) => {
             if(elem.name === title){
-                let dummyData = [...data];
+                let dummyData = [...dataCopy];
+                // let dummyData = [...data];
+                // let fixData = [...dummyData];
                 switch(elem.type){
                     case "boolean":
                         setData(
