@@ -21,10 +21,12 @@ const getTitles = () => {
 
 const useFilter = () => {
     const [data, setData] = useState([]);
+    const [dataCopy, setDataCopy] = useState([]);
     const [headersData, setHeadersData] = useState([]);
 
     useEffect(() => {
         setData(table);
+        setDataCopy(table);
         setHeadersData(getTitles());
         return () => {
         }
@@ -107,7 +109,7 @@ const useFilter = () => {
     const searchFor = (title, value) => {
         headersData.forEach((elem) => {
             if(elem.name === title){
-                let dummyData = [...data];
+                let dummyData = [...dataCopy];
                 switch(elem.type){
                     case "boolean":
                         setData(
@@ -133,18 +135,16 @@ const useFilter = () => {
     }
 
     const listTitles = headersData.map((title) => 
-        <>
-            <th key={title.name}>
-                <input type="text" onChange={(e)=>
-                    searchFor(title.name,e.target.value)
-                }/>
-                <div>
-                    {title.name}
-                    <button onClick={()=>{setColumnAsc(title.name)}}>Ascending {title.name}</button>
-                    <button onClick={()=>{setColumnDesc(title.name)}}>Descending {title.name}</button>
-                </div>
-            </th>
-        </>
+        <th key={title.name}>
+            <input type="text" className="border-solid border-4 border-light-blue-500" onChange={(e)=>
+                searchFor(title.name,e.target.value)
+            }/>
+            <div>
+                {title.name}
+                <button onClick={()=>{setColumnAsc(title.name)}}>Ascending {title.name}</button>
+                <button onClick={()=>{setColumnDesc(title.name)}}>Descending {title.name}</button>
+            </div>
+        </th>
     );
     
     const tableDataView = data.map((obj) => 
