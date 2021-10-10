@@ -1,0 +1,16 @@
+1.Remove react-icons package
+2.Use styled-icon instead of react-icons (Styled icons are tree shakable) https://styled-icons.de
+3.Add a new generic table components using react-virtualized
+Please check : https://openbase.com/js/react-virtualized
+4.Style the tables using tailwind css (you can use the code in this link
+https://tailwindui.com/components/application-ui/lists/tables) (First table)
+5.Migrate the generic components created to the component folder
+6.Migrate the next project to typescript and transform all file to .tsx
+
+NB: Before choosing any package to browse https://openbase.com/categories/js
+so you can have a look on available packages that can help you achieve your goal.
+Always look for packages that support tree-sharking and have support for typescript
+and packages that hasn't been deprecated
+
+Other : Learn about the concept of tree-shaking so you can understand the importance
+of picking the right library for the job while making sure of the performance
