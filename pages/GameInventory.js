@@ -5,8 +5,8 @@ export default function GameInventory() {
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
 
       <main>
-        <DynamicTable>
-          
+        {/* 3 possible themes: cyberpunk / dark / no theme (default) */}
+        <DynamicTable theme="cyberpunk">
         </DynamicTable>
       </main>
 

@@ -1,5 +1,8 @@
 import { table } from "./mock-data";
 import { useState,  useEffect } from "react";
+import { HiSortAscending } from "react-icons/hi";
+import { HiSortDescending } from "react-icons/hi";
+import Tr from "./Tr.styled";
 
 const getTitles = () => {
     let firstObject = table[0];
@@ -19,7 +22,9 @@ const getTitles = () => {
     return tableTitles;
 } 
 
-const useFilter = () => {
+const firstLetterCaps = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+
+const useFilter = (props) => {
     const [data, setData] = useState([]);
     const [dataCopy, setDataCopy] = useState([]);
     const [headersData, setHeadersData] = useState([]);
@@ -135,24 +140,23 @@ const useFilter = () => {
     }
 
     const listTitles = headersData.map((title) => 
-        <th key={title.name}>
-            <input type="text" className="border-solid border-4 border-light-blue-500" onChange={(e)=>
+        <th key={title.name} className="py-2.5 px-3.5">
+            <div className="flex justify-evenly">
+                <button onClick={()=>{setColumnAsc(title.name)}}><HiSortAscending/></button>
+                <button onClick={()=>{setColumnDesc(title.name)}}><HiSortDescending/></button>
+            </div>
+            <input type="text" placeholder={firstLetterCaps(title.name)} className="focus:outline-none placeholder-gray-800 text-black text-center" onChange={(e)=>
                 searchFor(title.name,e.target.value)
             }/>
-            <div>
-                {title.name}
-                <button onClick={()=>{setColumnAsc(title.name)}}>Ascending {title.name}</button>
-                <button onClick={()=>{setColumnDesc(title.name)}}>Descending {title.name}</button>
-            </div>
         </th>
     );
     
     const tableDataView = data.map((obj) => 
-        <tr key={obj.id}>
+        <Tr key={obj.id} {...props}>
             {headersData.map((title) => 
                 <th key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</th>
             )}
-        </tr>
+        </Tr>
     );
 
     return {listTitles, tableDataView, setColumnAsc,setColumnDesc};

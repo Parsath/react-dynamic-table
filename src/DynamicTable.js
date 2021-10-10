@@ -1,21 +1,21 @@
-import { useState } from "react";
 import useFilter from "./useFilter"
+import Thead from "./Thead.styled";
 
-export default function DynamicTable() {
-  const {listTitles, tableDataView, setColumnAsc, setColumnDesc} = useFilter();
+export default function DynamicTable(props) {
+  const {listTitles, tableDataView, setColumnAsc, setColumnDesc} = useFilter(props);
 
   console.log(tableDataView);
   
   return (
   <>
-      <table className="table-auto">
+      <table className="table-auto rounded-3xl">
       {/* <table> */}
-        <thead>
+        <Thead {...props}>
           <tr>
             {listTitles}
           </tr>
-        </thead>
-        <tbody>
+        </Thead>
+        <tbody className="p-4">
           {tableDataView}
         </tbody>
       </table>
