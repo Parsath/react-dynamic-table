@@ -10,6 +10,12 @@ export default function Home() {
         <span className="block">Using Tailwind Css and styled component</span>
 
         <div className="mt-8 flex justify-center">
+<<<<<<< HEAD
+          <div className="inline-flex rounded-md shadow"></div>
+          <div className="ml-3 inline-flex">
+            {/* Buttons Section */}
+            <Button $primary={true} $textColor="text-9azwardi">Primary</Button>
+=======
           {/* Buttons Section */}
           {/* Choose colors : red - blue - yellow - gray */}
           <div class="grid grid-cols-3 gap-4">
@@ -18,6 +24,7 @@ export default function Home() {
             <Button $color={'green'}>Primary</Button>
             <Button $color={'yellow'}>Primary</Button>
             <Button $color={'grey'}>Primary</Button>
+>>>>>>> 3eba2504bf4051e9da2624987d5548891e6eb833
           </div>
         </div>
       </div>
