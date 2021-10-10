@@ -12,7 +12,7 @@ export default function Home() {
           <div className="inline-flex rounded-md shadow"></div>
           <div className="ml-3 inline-flex">
             {/* Buttons Section */}
-            <Button $primary={true}>Primary</Button>
+            <Button $primary={true} $textColor="text-9azwardi">Primary</Button>
           </div>
         </div>
       </div>

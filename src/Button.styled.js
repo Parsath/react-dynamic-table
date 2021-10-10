@@ -2,6 +2,7 @@ import tw from 'tailwind-styled-components';
 
 const Button = tw.div`
     ${(p) => (p.$primary ? 'bg-indigo-600' : 'bg-indigo-300')}
+    ${(p) => (p.$textColor ? p.$textColor : 'text-white')}
       inline-flex 
       items-center 
       px-3.5 
@@ -12,7 +13,6 @@ const Button = tw.div`
       font-medium 
       rounded 
       shadow-sm 
-      text-white 
       bg-indigo-600 
       hover:bg-indigo-700 
       focus:outline-none 
