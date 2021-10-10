@@ -1,4 +1,4 @@
-import Button from '../src/Button.styled';
+import Button from '../src/button.styled';
 
 export default function Home() {
   return (
@@ -6,13 +6,18 @@ export default function Home() {
       <div className="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           <span className="block">This is a button demo</span>
-          <span className="block">Using Tailwind Css and styled component</span>
         </h2>
+        <span className="block">Using Tailwind Css and styled component</span>
+
         <div className="mt-8 flex justify-center">
-          <div className="inline-flex rounded-md shadow"></div>
-          <div className="ml-3 inline-flex">
-            {/* Buttons Section */}
-            <Button $primary={true}>Primary</Button>
+          {/* Buttons Section */}
+          {/* Choose colors : red - blue - yellow - gray */}
+          <div class="grid grid-cols-3 gap-4">
+            <Button $color={'red'}>Primary</Button>
+            <Button $color={'blue'}>Primary</Button>
+            <Button $color={'green'}>Primary</Button>
+            <Button $color={'yellow'}>Primary</Button>
+            <Button $color={'grey'}>Primary</Button>
           </div>
         </div>
       </div>
