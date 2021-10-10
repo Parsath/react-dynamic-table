@@ -97,9 +97,9 @@ Day 6: 10/10/2021           14h56
     References:
         *
 
-WORKTIME: 
+WORKTIME: 1H46M
 
-Stopping time: 10/10/2021 
+Stopping time: 10/10/2021 17h24 
 
 
 
