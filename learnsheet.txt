@@ -86,6 +86,23 @@ Stopping time: 09/10/2021 4h51
 
 
 
+Day 6: 10/10/2021           14h56
+
+    STEP 7:
+        -Style the table
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME: 
+
+Stopping time: 10/10/2021 
+
+
+
 
 
 
@@ -101,7 +118,8 @@ Stopping time: 09/10/2021 4h51
         -Créer premier bouton configurable
         -Créer un fichier mock-data
         -Créer un tableau dynamique
-        -Remplit automatiquement les colonnes, reconnait leur type et peut faire un tri ascendant ou descendant 
+        -Remplit automatiquement les colonnes, reconnait leur type et peut faire un tri ascendant ou descendant
+        -Style the table 
 
 ///
 
