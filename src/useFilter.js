@@ -1,7 +1,7 @@
 import { table } from "./mock-data";
 import { useState,  useEffect } from "react";
-import { HiSortAscending } from "react-icons/hi";
-import { HiSortDescending } from "react-icons/hi";
+import styled from 'styled-components';
+import { SortAscending, SortDescending } from "@styled-icons/heroicons-solid";
 import Tr from "./Tr.styled";
 
 const getTitles = () => {
@@ -142,8 +142,8 @@ const useFilter = (props) => {
     const listTitles = headersData.map((title) => 
         <th key={title.name} className="py-2.5 px-3.5">
             <div className="flex justify-evenly">
-                <button onClick={()=>{setColumnAsc(title.name)}}><HiSortAscending/></button>
-                <button onClick={()=>{setColumnDesc(title.name)}}><HiSortDescending/></button>
+                <button onClick={()=>{setColumnAsc(title.name)}}><SortAscending size="20"/></button>
+                <button onClick={()=>{setColumnDesc(title.name)}}><SortDescending size="20"/></button>
             </div>
             <input type="text" placeholder={firstLetterCaps(title.name)} className="focus:outline-none placeholder-gray-800 text-black text-center" onChange={(e)=>
                 searchFor(title.name,e.target.value)

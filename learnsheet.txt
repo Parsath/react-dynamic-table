@@ -91,15 +91,23 @@ Day 6: 10/10/2021           14h56
     STEP 7:
         -Style the table
 
+    STEP 7 Completed
+
+    STEP 8:
+        -Remove react-icons package
+        -Use styled-icon instead of react-icons (Styled icons are tree shakable) https://styled-icons.dev
+
+    STEP 8 Completed
+
     Notes:
         *
 
     References:
         *
 
-WORKTIME: 1H46M
+WORKTIME:
 
-Stopping time: 10/10/2021 17h24 
+Stopping time: 10/10/2021 
 
 
 
@@ -114,12 +122,48 @@ Stopping time: 10/10/2021 17h24
 /// TODO:
 
         -Lire docs Nextjs + tailwind + styled-components
+
+            DONE 06/10/2021
+
         -Installer environnement de travail nextjs + tailwind + styled-components
+        
+            DONE 06/10/2021
+
         -Créer premier bouton configurable
+                
+            DONE 06/10/2021
+
         -Créer un fichier mock-data
+                
+            DONE 07/10/2021
+
         -Créer un tableau dynamique
+                
+            DONE 09/10/2021
+
         -Remplit automatiquement les colonnes, reconnait leur type et peut faire un tri ascendant ou descendant
-        -Style the table 
+                
+            DONE 09/10/2021
+
+        -Style the table
+                
+            DONE 10/10/2021
+
+        -Remove react-icons package
+                        
+            DONE 10/10/2021
+
+        -Use styled-icon instead of react-icons (Styled icons are tree shakable) https://styled-icons.dev
+                        
+            DONE 10/10/2021
+
+        -Add a new generic table components using react-virtualized
+        Please check : https://openbase.com/js/react-virtualized
+        -READ ABOUT TREESHAKING 
+        -Style the tables using tailwind css (you can use the code in this link
+        https://tailwindui.com/components/application-ui/lists/tables) (First table)
+        -Migrate the generic components created to the component folder
+        -Migrate the next project to typescript and transform all file to .tsx
 
 ///
 
