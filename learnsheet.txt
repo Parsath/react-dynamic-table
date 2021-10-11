@@ -82,7 +82,7 @@ Day 5: 08/10/2021           14h30
 
 WORKTIME: 6H06M
 
-Stopping time: 09/10/2021 4h51
+Stopping time: 09/10/2021   4h51
 
 
 
@@ -107,7 +107,24 @@ Day 6: 10/10/2021           14h56
 
 WORKTIME: 2H32M
 
-Stopping time: 11/10/2021 00h22 
+Stopping time: 11/10/2021   00h22
+
+
+
+Day 7: 11/10/2021           12h10
+
+    STEP 9:
+        -Add a new generic table components using react-virtualized
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME:
+
+Stopping time: 11/10/2021   
 
 
 
@@ -158,7 +175,7 @@ Stopping time: 11/10/2021 00h22
             DONE 10/10/2021
 
         -Add a new generic table components using react-virtualized
-        Please check : https://openbase.com/js/react-virtualized
+            NB: Please check : https://openbase.com/js/react-virtualized
         -READ ABOUT TREESHAKING 
         -Style the tables using tailwind css (you can use the code in this link
         https://tailwindui.com/components/application-ui/lists/tables) (First table)
