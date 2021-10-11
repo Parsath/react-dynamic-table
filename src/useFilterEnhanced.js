@@ -3,6 +3,9 @@ import { useState,  useEffect } from "react";
 import styled from 'styled-components';
 import { SortAscending, SortDescending } from "@styled-icons/heroicons-solid";
 import Tr from "./Tr.styled";
+import { FixedSizeList as List } from 'react-window';
+
+
 
 const getTitles = () => {
     let firstObject = table[0];
@@ -23,7 +26,7 @@ const getTitles = () => {
 
 const firstLetterCaps = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
-const useFilter = (props) => {
+const useFilterEnhanced = (props) => {
     const [data, setData] = useState([]);
     const [dataCopy, setDataCopy] = useState([]);
     const [headersData, setHeadersData] = useState([]);
@@ -35,6 +38,17 @@ const useFilter = (props) => {
         return () => {
         }
     }, [])
+
+
+    // const RowParameters = (props, obj) => {
+        
+    //     const Row = ({ index, style }) => (
+    //         <TableRowWithData index={index} obj={obj} theme={props.theme} style={style}/>
+    //     );
+
+    //     return Row;
+
+    // }
 
     const setColumnAsc = (name) => {
         headersData.forEach((title) => {
@@ -149,16 +163,57 @@ const useFilter = (props) => {
             }/>
         </th>
     );
-    
-    const tableDataView = data.map((obj) => 
-        <Tr key={obj.id} {...props}>
-            {headersData.map((title) => 
-                <td key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</td>
-            )}
-        </Tr>
-    );
 
-    return {listTitles, tableDataView};
+    // PROBLEM: Forcing the user to have an "id" attribute
+    // const TableRowWithData  = ({index,obj,theme,style}) => {
+    //     return (
+    //         <Tr style={style} key={index} theme={theme}>
+    //             {headersData.map((title) => 
+    //                 <td key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</td>
+    //             )}
+    //         </Tr>
+    //     )
+    // }
+    
+    const Row = ({ index, style, data}) => {
+        // console.log("This is data : \n" +data);
+        // console.log("This is data INDEX: \n"+data[index])
+        return(
+            <Tr style={style} key={index} theme={props.theme}>
+                {headersData.map((title) => 
+                    <td key={data[index][title.name]}>{typeof data[index][title.name] === "boolean" ? Boolean(data[index][title.name]).toString() : data[index][title.name]}</td>
+                    // <td key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</td>
+                )}
+            </Tr>
+        ) 
+    };
+    
+    const TableDataView = () => {    
+        return (
+            <List
+                innerElementType="tr"
+                outerElementType="tr"
+                itemData={data}
+                itemCount={data.length}
+                itemSize={50}
+                width={"400%"}
+                height={300}
+            >
+                {Row}
+            </List>
+        )    
+    };
+
+    
+    // const tableDataView = data.map((obj) => 
+        // <Tr key={obj.id} {...props}>
+        //     {headersData.map((title) => 
+        //         <th key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</th>
+        //     )}
+        // </Tr>
+    // );
+
+    return {listTitles, TableDataView};
 };
 
-export default useFilter;
+export default useFilterEnhanced;
