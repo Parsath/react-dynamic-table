@@ -1,4 +1,4 @@
-// import { table } from "./mock-data";
+import { table } from "./mock-data";
 // import { table } from "./generated";
 import { useState,  useEffect } from "react";
 import styled from 'styled-components';
@@ -6,17 +6,17 @@ import { SortAscending, SortDescending } from "@styled-icons/heroicons-solid";
 import Tr from "./Tr.styled";
 import { FixedSizeList as List } from 'react-window';
 
-export const getStaticProps = async () =>{
+// export const getStaticProps = async () =>{
     
-    const res = await fetch(`api/table`)
-    const data = await res.json()
+//     const res = await fetch(`api/table`)
+//     const data = await res.json()
 
-    alert("here getstatic props"+data);
+//     alert("here getstatic props"+data);
 
-    return {
-      props: { data }, // will be passed to the page component as props
-    }
-}
+//     return {
+//       props: { data }, // will be passed to the page component as props
+//     }
+// }
 
 const getTitles = (table) => {
     let firstObject = table[0];
@@ -37,26 +37,28 @@ const getTitles = (table) => {
 
 const firstLetterCaps = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
-const useFilterEnhanced = ({theme, data}) => {
+const useFilterEnhanced = ({theme}) => {
     const [tableData, setData] = useState([]);
     const [dataCopy, setDataCopy] = useState([]);
     const [headersData, setHeadersData] = useState([]);
     // const { data, error } = useSWR(`api/table`, fetcher)
 
     useEffect(() => {
-        if(!data){
-            alert("not found");
-            setData([]);
-            setDataCopy([]);
-            setHeadersData([]);
-        }
-        else {
-            alert(data);
-            setData(data);
-            setDataCopy(data);
-            setHeadersData(getTitles(data));
-        }
-        console.log(data);
+    //     if(!data){
+    //         alert("not found");
+    //         setData([]);
+    //         setDataCopy([]);
+    //         setHeadersData([]);
+    //     }
+    //     else {
+    //         alert(data);
+    //         setData(data);
+    //         setDataCopy(data);
+    //         setHeadersData(getTitles(data));
+    //     }
+        setData(table);
+        setDataCopy(table);
+        setHeadersData(getTitles(table));
         return () => {
         }
     }, [])
