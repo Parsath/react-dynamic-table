@@ -1,10 +1,11 @@
-import useFilter from "./useFilter"
+import useFilterEnhanced from "./useFilterEnhanced";
+import useFilter from "./useFilter";
 import Thead from "./Thead.styled";
 
 export default function DynamicTable(props) {
-  const {listTitles, tableDataView, setColumnAsc, setColumnDesc} = useFilter(props);
+  const {listTitles, TableDataView} = useFilterEnhanced(props);
 
-  console.log(tableDataView);
+  // console.log(tableDataView);
   
   return (
   <>
@@ -16,7 +17,8 @@ export default function DynamicTable(props) {
           </tr>
         </Thead>
         <tbody className="p-4">
-          {tableDataView}
+          {/* {tableDataView} */}
+          <TableDataView/>
         </tbody>
       </table>
     </>
