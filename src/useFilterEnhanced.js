@@ -1,13 +1,24 @@
-import { table } from "./mock-data";
+// import { table } from "./mock-data";
+// import { table } from "./generated";
 import { useState,  useEffect } from "react";
 import styled from 'styled-components';
 import { SortAscending, SortDescending } from "@styled-icons/heroicons-solid";
 import Tr from "./Tr.styled";
 import { FixedSizeList as List } from 'react-window';
 
+export const getStaticProps = async () =>{
+    
+    const res = await fetch(`api/table`)
+    const data = await res.json()
 
+    alert("here getstatic props"+data);
 
-const getTitles = () => {
+    return {
+      props: { data }, // will be passed to the page component as props
+    }
+}
+
+const getTitles = (table) => {
     let firstObject = table[0];
     let tableTitles = [];
     if(table)
@@ -26,15 +37,26 @@ const getTitles = () => {
 
 const firstLetterCaps = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
-const useFilterEnhanced = (props) => {
-    const [data, setData] = useState([]);
+const useFilterEnhanced = ({theme, data}) => {
+    const [tableData, setData] = useState([]);
     const [dataCopy, setDataCopy] = useState([]);
     const [headersData, setHeadersData] = useState([]);
+    // const { data, error } = useSWR(`api/table`, fetcher)
 
     useEffect(() => {
-        setData(table);
-        setDataCopy(table);
-        setHeadersData(getTitles());
+        if(!data){
+            alert("not found");
+            setData([]);
+            setDataCopy([]);
+            setHeadersData([]);
+        }
+        else {
+            alert(data);
+            setData(data);
+            setDataCopy(data);
+            setHeadersData(getTitles(data));
+        }
+        console.log(data);
         return () => {
         }
     }, [])
@@ -53,7 +75,7 @@ const useFilterEnhanced = (props) => {
     const setColumnAsc = (name) => {
         headersData.forEach((title) => {
             if(title.name === name){
-                let dummyData = [...data];
+                let dummyData = [...tableData];
                 switch(title.type){
                     case "boolean":
                     case "number":
@@ -84,13 +106,13 @@ const useFilterEnhanced = (props) => {
                 }
             }
         })
-        console.log(data);
+        console.log(tableData);
     }
 
     const setColumnDesc = (name) => {
         headersData.forEach((title) => {
             if(title.name === name){
-                let dummyData = [...data];
+                let dummyData = [...tableData];
                 switch(title.type){
                     case "boolean":
                     case "number":
@@ -121,7 +143,7 @@ const useFilterEnhanced = (props) => {
                 }
             }
         })
-        console.log(data);
+        console.log(tableData);
     }
 
     const searchFor = (title, value) => {
@@ -179,7 +201,7 @@ const useFilterEnhanced = (props) => {
         // console.log("This is data : \n" +data);
         // console.log("This is data INDEX: \n"+data[index])
         return(
-            <Tr style={style} key={index} theme={props.theme}>
+            <Tr style={style} key={index} theme={theme}>
                 {headersData.map((title) => 
                     <td key={data[index][title.name]}>{typeof data[index][title.name] === "boolean" ? Boolean(data[index][title.name]).toString() : data[index][title.name]}</td>
                     // <td key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</td>
@@ -193,8 +215,8 @@ const useFilterEnhanced = (props) => {
             <List
                 innerElementType="tr"
                 outerElementType="tr"
-                itemData={data}
-                itemCount={data.length}
+                itemData={tableData}
+                itemCount={tableData.length}
                 itemSize={50}
                 width={"400%"}
                 height={300}
@@ -205,7 +227,7 @@ const useFilterEnhanced = (props) => {
     };
 
     
-    // const tableDataView = data.map((obj) => 
+    // const tableDataView = tableData.map((obj) => 
         // <Tr key={obj.id} {...props}>
         //     {headersData.map((title) => 
         //         <th key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</th>
