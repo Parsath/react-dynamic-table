@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { SortAscending, SortDescending } from "@styled-icons/heroicons-solid";
 import Tr from "./Tr.styled";
 import { FixedSizeList as List } from 'react-window';
+import AutoSizer from "react-virtualized-auto-sizer";
 
 
 
@@ -181,28 +182,47 @@ const useFilterEnhanced = (props) => {
         return(
             <Tr style={style} key={index} theme={props.theme}>
                 {headersData.map((title) => 
-                    <td key={data[index][title.name]}>{typeof data[index][title.name] === "boolean" ? Boolean(data[index][title.name]).toString() : data[index][title.name]}</td>
+                    <td key={data[index][title.name]}>{index}{typeof data[index][title.name] === "boolean" ? Boolean(data[index][title.name]).toString() : data[index][title.name]}</td>
                     // <td key={obj[title.name]}>{typeof obj[title.name] === "boolean" ? Boolean(obj[title.name]).toString() : obj[title.name]}</td>
                 )}
             </Tr>
         ) 
     };
+
+     const TableDataView = () => (
+  <AutoSizer>
+    {({ height, width }) => (
+      <List
+        className="List"
+        itemSize={50}
+        width={1600}
+        height={300}
+        itemData={data}
+        itemCount={data.length}
+      >
+        {Row}
+      </List>
+    )}
+  </AutoSizer>
+);
+
     
-    const TableDataView = () => {    
-        return (
-            <List
-                innerElementType="tr"
-                outerElementType="tr"
-                itemData={data}
-                itemCount={data.length}
-                itemSize={50}
-                width={"400%"}
-                height={300}
-            >
-                {Row}
-            </List>
-        )    
-    };
+    // const TableDataView = () => (   
+    //     <AutoSizer>
+    //         <List
+    //             innerElementType="tr"
+    //             outerElementType="tr"
+    //             itemData={data}
+    //             itemCount={data.length}
+    //             itemSize={50}
+    //             width={300}
+    //             height={300}
+    //         >
+    //             {Row}
+    //         </List>
+    //         </AutoSizer>
+    //     )    
+    // ;
 
     
     // const tableDataView = data.map((obj) => 

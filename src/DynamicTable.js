@@ -1,6 +1,7 @@
 import useFilterEnhanced from "./useFilterEnhanced";
 import useFilter from "./useFilter";
 import Thead from "./Thead.styled";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 export default function DynamicTable(props) {
   const {listTitles, TableDataView} = useFilterEnhanced(props);
