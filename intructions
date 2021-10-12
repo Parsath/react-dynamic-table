@@ -14,3 +14,9 @@ and packages that hasn't been deprecated
 
 Other : Learn about the concept of tree-shaking so you can understand the importance
 of picking the right library for the job while making sure of the performance
+
+
+NEXT
+1. Implement Lazy loading faking an api call
+2. Implement react infite loader https://github.com/bvaughn/react-window-infinite-loader
+3. Make Row number selectable by the user
