@@ -20,7 +20,7 @@ NEXT
 1. Implement Lazy loading faking an api call
 2. Implement react infite loader https://github.com/bvaughn/react-window-infinite-loader
 3. Make Row number selectable by the user
-4. Use memo and shallow compare
+4. Use memo (shallow compare) 
 
 LINKS to check :
 https://addyosmani.com/blog/react-window/

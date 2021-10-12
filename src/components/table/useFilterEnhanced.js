@@ -29,20 +29,20 @@ const useFilterEnhanced = ({ theme }) => {
     if (column.type === 'string') {
       if (sortDirection === 'ASC') {
         setData(
-          dataCopy.sort((a, b) =>
+          [...tableData].sort((a, b) =>
             a[sortBy].localeCompare(b[sortBy], { sensitivity: 'base' })
           )
         );
       } else {
         setData(
-          dataCopy.reverse((a, b) =>
-            a[sortBy].localeCompare(b[sortBy], { sensitivity: 'base' })
+          [...tableData].sort((a, b) =>
+            b[sortBy].localeCompare(a[sortBy], { sensitivity: 'base' })
           )
         );
       }
     } else if (column.type === 'number' || column.type === 'boolean') {
       setData(
-        dataCopy.sort((a, b) => {
+        [...tableData].sort((a, b) => {
           sortDirection === 'ASC'
             ? a[column.value] - b[column.value]
             : b[column.value] - a[column.value];
@@ -56,17 +56,21 @@ const useFilterEnhanced = ({ theme }) => {
     switch (column.type) {
       case 'boolean':
         setData(
-          dataCopy.filter((x) => Boolean(x[title]).toString().includes(value))
+          [...dataCopy].filter((x) =>
+            Boolean(x[title]).toString().includes(value)
+          )
         );
         break;
       case 'number':
         setData(
-          dataCopy.filter((x) => Number(x[title]).toString().includes(value))
+          [...dataCopy].filter((x) =>
+            Number(x[title]).toString().includes(value)
+          )
         );
         break;
       case 'string':
         setData(
-          dataCopy.filter((x) =>
+          [...dataCopy].filter((x) =>
             x[title].toUpperCase().includes(value.toUpperCase())
           )
         );
