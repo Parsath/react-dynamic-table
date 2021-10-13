@@ -2,8 +2,10 @@ import { MockData } from '../../data/mock-data';
 import { useState, useEffect } from 'react';
 import { SortAscending, SortDescending } from '@styled-icons/heroicons-solid';
 import Tr from '../style/tr.styled';
+import Thead from '../style/thead.styled';
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
+import VirtualTable from './sheet'
 
 const useFilterEnhanced = ({ theme }) => {
   const [tableData, setData] = useState([]);
@@ -52,7 +54,9 @@ const useFilterEnhanced = ({ theme }) => {
   };
 
   const searchFor = (title, value) => {
+    console.log(value);
     const column = headersData.find((item) => item.value === title);
+    console.log(column);
     switch (column.type) {
       case 'boolean':
         setData(
@@ -91,18 +95,71 @@ const useFilterEnhanced = ({ theme }) => {
           <SortDescending size="20" />
         </button>
       </div>
-      <input
-        type="text"
-        placeholder={item.value}
-        className="focus:outline-none placeholder-gray-400 text-black text-center"
-        onChange={(e) => searchFor(item.value, e.target.value)}
-      />
+      <div>
+        <input
+          type="text"
+          placeholder={item.value}
+          className="focus:outline-none placeholder-gray-400 text-black text-center"
+          onChange={(e) => searchFor(item.value, e.target.value)}
+          // onChange={(e) => console.log(e.target.value)}
+        />
+      </div>
     </th>
   ));
 
-  const Row = ({ index, style, data }) => {
+  // const searchInputs = headersData.map((item) => (
+  //   <div className="h-7">
+  //     <input
+  //       type="text"
+  //       placeholder={item.value}
+  //       className="focus:outline-none placeholder-gray-400 text-black text-center"
+  //       onChange={(e) => searchFor(item.value, e.target.value)}
+  //       // onChange={(e) => console.log(e.target.value)}
+  //     />
+  //   </div>
+  // ));
+
+  // const SearchFilter = () => (
+  //   <div clasName="flex flex-row justify-between">
+  //     {searchInputs}
+  //   </div>
+  // )
+  
+
+  // const Row = ({ index, style, data }) => {
+  //   return (
+  //     <Tr style={style} key={index} theme={theme}>
+  //       {headersData.map((item) => (
+  //         <td key={data[index][item.value]}>
+  //           {typeof data[index][item.value] === 'boolean'
+  //             ? Boolean(data[index][item.value]).toString()
+  //             : data[index][item.value]}
+  //         </td>
+  //       ))}
+  //     </Tr>
+  //   );
+  // };
+
+  const TableDataView = () => (
+    <AutoSizer>
+      {({ height, width, sortDirection }) => (
+        <List
+          className="List"
+          itemSize={50}
+          width={width}
+          height={400}
+          itemData={tableData}
+          itemCount={tableData.length}
+        >
+          {Row}
+        </List>
+      )}
+    </AutoSizer>
+  );
+
+  const Row = ({ index, data }) => {
     return (
-      <Tr style={style} key={index} theme={theme}>
+      <Tr key={index} theme={theme}>
         {headersData.map((item) => (
           <td key={data[index][item.value]}>
             {typeof data[index][item.value] === 'boolean'
@@ -114,24 +171,37 @@ const useFilterEnhanced = ({ theme }) => {
     );
   };
 
-  const TableDataView = () => (
-    <AutoSizer>
-      {({ height, width, sortDirection }) => (
-        <List
-          className="List"
-          itemSize={50}
-          width={810}
-          height={300}
-          itemData={tableData}
-          itemCount={tableData.length}
-        >
-          {Row}
-        </List>
-      )}
-    </AutoSizer>
-  );
+  const GenericTable = () => {
+    return (
+      <AutoSizer>
+        {({ height, width, sortDirection }) => (
+          <VirtualTable
+            className="List"
+            itemSize={36}
+            width={width}
+            height={height}
+            itemData={tableData}
+            itemCount={tableData.length}
+            header={
+              <Thead theme={theme}>
+                <tr>
+                  {listTitles}
+                </tr>
+              </Thead>
+            }
+            footer={
+                    <tfoot>
+                      <tr>
+                      </tr>
+                    </tfoot>}
+            row={Row}
+          />
+        )}
+      </AutoSizer>
+    )
+  }
 
-  return { listTitles, TableDataView };
+  return { listTitles, TableDataView, GenericTable};
 };
 
 export default useFilterEnhanced;

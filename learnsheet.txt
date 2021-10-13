@@ -116,15 +116,39 @@ Day 7: 11/10/2021           12h10
     STEP 9:
         -Add a new generic table components using react-virtualized
 
+    STEP 9 Completed
+
     Notes:
         *
 
     References:
         *
 
-WORKTIME:
+WORKTIME: 7H30M
 
-Stopping time: 11/10/2021   
+Stopping time: 11/10/2021   23h49   
+
+
+
+Day 8: 13/10/2021           14h31
+
+    STEP 10:
+        -Style the tables using tailwind css (you can use the code in this link
+
+    STEP 10 Paused
+
+    STEP 11:
+        -Fix dom problem with generic table
+
+    Notes:
+        *
+
+    References:
+        *
+
+WORKTIME: 
+
+Stopping time: 13/10/2021   
 
 
 
@@ -176,11 +200,14 @@ Stopping time: 11/10/2021
 
         -Add a new generic table components using react-virtualized
             NB: Please check : https://openbase.com/js/react-virtualized
-        -READ ABOUT TREESHAKING 
+
+            DONE 11/10/2021
+ 
         -Style the tables using tailwind css (you can use the code in this link
         https://tailwindui.com/components/application-ui/lists/tables) (First table)
-        -Migrate the generic components created to the component folder
+        -Fix dom problem with generic table
         -Migrate the next project to typescript and transform all file to .tsx
+        -READ ABOUT TREESHAKING
 
 ///
 
