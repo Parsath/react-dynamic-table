@@ -146,9 +146,9 @@ Day 8: 13/10/2021           14h31
     References:
         *
 
-WORKTIME: 
+WORKTIME: 4H47M
 
-Stopping time: 13/10/2021   
+Stopping time: 13/10/2021   23h28
 
 
 

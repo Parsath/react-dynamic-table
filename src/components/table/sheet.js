@@ -4,7 +4,7 @@ import { FixedSizeList, FixedSizeListProps } from 'react-window'
 
 /** Context for cross component communication */
 const VirtualTableContext = React.createContext({
-  top: 1,
+  top: 0,
   setTop: (value) => {},
   header: <></>,
   footer: <></>,
@@ -26,14 +26,14 @@ function VirtualTable({
         {...rest}
         innerElementType={Inner}
         onItemsRendered={props => {
-          const style =
-            listRef.current &&
-            // @ts-ignore private method access
-            listRef.current._getItemStyle(props.overscanStartIndex)
-          setTop((style && style.top) || 0)
+            const style =
+                listRef.current &&
+                // @ts-ignore private method access
+                listRef.current._getItemStyle(props.overscanStartIndex)
+            setTop((style && style.top) || 0)
 
-          // Call the original callback
-          rest.onItemsRendered && rest.onItemsRendered(props)
+            // Call the original callback
+            rest.onItemsRendered && rest.onItemsRendered(props)
         }}
         ref={el => (listRef.current = el)}
       >

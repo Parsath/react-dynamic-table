@@ -1,5 +1,5 @@
 import { MockData } from '../../data/mock-data';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { SortAscending, SortDescending } from '@styled-icons/heroicons-solid';
 import Tr from '../style/tr.styled';
 import Thead from '../style/thead.styled';
@@ -53,37 +53,37 @@ const useFilterEnhanced = ({ theme }) => {
     }
   };
 
-  const searchFor = (title, value) => {
-    console.log(value);
-    const column = headersData.find((item) => item.value === title);
-    console.log(column);
-    switch (column.type) {
-      case 'boolean':
-        setData(
-          [...dataCopy].filter((x) =>
-            Boolean(x[title]).toString().includes(value)
-          )
-        );
-        break;
-      case 'number':
-        setData(
-          [...dataCopy].filter((x) =>
-            Number(x[title]).toString().includes(value)
-          )
-        );
-        break;
-      case 'string':
-        setData(
-          [...dataCopy].filter((x) =>
-            x[title].toUpperCase().includes(value.toUpperCase())
-          )
-        );
-        break;
-      default:
-        alert('invalid data type');
-        break;
-    }
-  };
+  const searchFor = useCallback((title, value) =>{
+      console.log(value);
+      const column = headersData.find((item) => item.value === title);
+      console.log(column);
+      switch (column.type) {
+        case 'boolean':
+          setData(
+            [...dataCopy].filter((x) =>
+              Boolean(x[title]).toString().includes(value)
+            )
+          );
+          break;
+        case 'number':
+          setData(
+            [...dataCopy].filter((x) =>
+              Number(x[title]).toString().includes(value)
+            )
+          );
+          break;
+        case 'string':
+          setData(
+            [...dataCopy].filter((x) =>
+              x[title].toUpperCase().includes(value.toUpperCase())
+            )
+          );
+          break;
+        default:
+          alert('invalid data type');
+          break;
+      }
+  }, [tableData])
 
   const listTitles = headersData.map((item) => (
     <th key={item.value} className="py-2.5 px-3.5">
@@ -106,6 +106,51 @@ const useFilterEnhanced = ({ theme }) => {
       </div>
     </th>
   ));
+
+  const Row = ({ index, data }) => {
+    return (
+      <Tr key={index} theme={theme}>
+        {headersData.map((item) => (
+          <td key={data[index][item.value]}>
+            {typeof data[index][item.value] === 'boolean'
+              ? Boolean(data[index][item.value]).toString()
+              : data[index][item.value]}
+          </td>
+        ))}
+      </Tr>
+    );
+  };
+
+  const GenericTable = () => {
+    return (
+      <AutoSizer>
+        {({ height, width, sortDirection }) => (
+          <VirtualTable
+            className="List"
+            itemSize={36}
+            width={width}
+            height={height}
+            itemData={tableData}
+            itemCount={tableData.length}
+            header={
+              <Thead theme={theme}>
+                <tr>
+                  {listTitles}
+                </tr>
+              </Thead>
+            }
+            row={Row}
+          />
+        )}
+      </AutoSizer>
+    )
+  }
+
+  return { listTitles,  GenericTable};
+};
+
+export default useFilterEnhanced;
+
 
   // const searchInputs = headersData.map((item) => (
   //   <div className="h-7">
@@ -140,68 +185,19 @@ const useFilterEnhanced = ({ theme }) => {
   //   );
   // };
 
-  const TableDataView = () => (
-    <AutoSizer>
-      {({ height, width, sortDirection }) => (
-        <List
-          className="List"
-          itemSize={50}
-          width={width}
-          height={400}
-          itemData={tableData}
-          itemCount={tableData.length}
-        >
-          {Row}
-        </List>
-      )}
-    </AutoSizer>
-  );
-
-  const Row = ({ index, data }) => {
-    return (
-      <Tr key={index} theme={theme}>
-        {headersData.map((item) => (
-          <td key={data[index][item.value]}>
-            {typeof data[index][item.value] === 'boolean'
-              ? Boolean(data[index][item.value]).toString()
-              : data[index][item.value]}
-          </td>
-        ))}
-      </Tr>
-    );
-  };
-
-  const GenericTable = () => {
-    return (
-      <AutoSizer>
-        {({ height, width, sortDirection }) => (
-          <VirtualTable
-            className="List"
-            itemSize={36}
-            width={width}
-            height={height}
-            itemData={tableData}
-            itemCount={tableData.length}
-            header={
-              <Thead theme={theme}>
-                <tr>
-                  {listTitles}
-                </tr>
-              </Thead>
-            }
-            footer={
-                    <tfoot>
-                      <tr>
-                      </tr>
-                    </tfoot>}
-            row={Row}
-          />
-        )}
-      </AutoSizer>
-    )
-  }
-
-  return { listTitles, TableDataView, GenericTable};
-};
-
-export default useFilterEnhanced;
+  // const TableDataView = () => (
+  //   <AutoSizer>
+  //     {({ height, width, sortDirection }) => (
+  //       <List
+  //         className="List"
+  //         itemSize={50}
+  //         width={width}
+  //         height={400}
+  //         itemData={tableData}
+  //         itemCount={tableData.length}
+  //       >
+  //         {Row}
+  //       </List>
+  //     )}
+  //   </AutoSizer>
+  // );
