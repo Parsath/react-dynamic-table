@@ -9,6 +9,11 @@ const TrStyled = tw.tr`
             hover:bg-gray-700
             hover:text-gray-200
           `
+          else if(p.theme === "tailwind") 
+            return `
+              bg-white
+              border-gray-200
+            `
         else if(p.theme === "cyberpunk") 
           return `
             bg-purple-600

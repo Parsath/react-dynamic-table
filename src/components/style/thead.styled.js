@@ -8,6 +8,12 @@ const TheadStyled = tw.thead`
             hover:bg-gray-900
             text-white
           `
+          else if(p.theme === "tailwind") 
+            return `
+              bg-gray-50
+              text-gray-500
+              border-gray-200
+            `
         else if(p.theme === "cyberpunk") 
           return `
             bg-purple-800

@@ -53,9 +53,11 @@ const Inner = React.forwardRef(
     const { header, footer, top } = useContext(VirtualTableContext)
     return (
       <div {...rest} ref={ref}>
-        <table className="table absolute object-left w-full text-center border-collapse border-solid table-auto" style={{ top }}>
+        <table className="table absolute min-w-full object-left border-collapse border-solid table-auto" style={{ top }}>
           {header}
-          <tbody>{children}</tbody>
+          <tbody className="">
+            {children}
+          </tbody>
           {footer}
         </table>
       </div>

@@ -1,8 +1,6 @@
-import useFilterEnhanced from './useFilterEnhanced';
-import Thead from '../style/thead.styled';
+import GenericTable from './genericTable';
 
 export default function EnhancedDynamicTable(props) {
-  const { GenericTable } = useFilterEnhanced(props);
 
   return (
     <div className="antialiased font-sans h-full bg-gray-200 overflow-hidden">
@@ -12,15 +10,7 @@ export default function EnhancedDynamicTable(props) {
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="shadow overflow-hidden border-b h-screen border-gray-200 sm:rounded-lg">
-                  {/* <table className="table-auto min-w-full divide-y divide-gray-200">
-                    <Thead {...props}>
-                      <tr>{listTitles}</tr>
-                    </Thead>
-                    <tbody>
-                      <TableDataView />
-                    </tbody>
-                  </table> */}
-                    <GenericTable/>
+                    <GenericTable theme={props.theme} />
                 </div>
               </div>
             </div>
