@@ -13,7 +13,7 @@
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6",
     "styled-components": "^5.3.1",
-    "styled-icons": "^10.44.0"
+    "styled-icons": "^10.45.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",

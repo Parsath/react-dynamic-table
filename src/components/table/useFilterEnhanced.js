@@ -1,27 +1,30 @@
-import { MockData } from '../../data/mock-data';
+// import { MockData } from '../../data/mock-data';
+import { MockData } from '../../data/generated';
 import { useState, useEffect } from 'react';
 import { SortAscending, SortDescending } from '@styled-icons/heroicons-solid';
-import Tr from '../style/tr.styled';
-import { FixedSizeList as List } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import SearchInput from '../style/searchInput.styled';
 
-const useFilterEnhanced = ({ theme }) => {
+const useFilterEnhanced = (props) => {
   const [tableData, setData] = useState([]);
   const [dataCopy, setDataCopy] = useState([]);
   const [headersData, setHeadersData] = useState([]);
+
+  const getUppercased = (name) => name.toUpperCase();
 
   useEffect(() => {
     setData(MockData);
     setDataCopy(MockData);
     setHeadersData(getTitles(MockData));
-    return () => {};
+    return () => {
+      console.log("just unmounted")
+    };
   }, []);
 
   const getTitles = (MockData) => {
-    const dataModel = MockData[0];
-    return Object.keys(dataModel).map((item) => {
-      return { value: item, type: typeof dataModel[item] };
-    });
+      const dataModel = MockData[0];
+      return Object.keys(dataModel).map((item) => {
+        return { value: item, type: typeof dataModel[item] };
+      });
   };
 
   const handleSort = (sortBy, sortDirection) => {
@@ -29,44 +32,49 @@ const useFilterEnhanced = ({ theme }) => {
     if (column.type === 'string') {
       if (sortDirection === 'ASC') {
         setData(
-          dataCopy.sort((a, b) =>
+          [...dataCopy].sort((a, b) =>
             a[sortBy].localeCompare(b[sortBy], { sensitivity: 'base' })
           )
         );
       } else {
         setData(
-          dataCopy.reverse((a, b) =>
-            a[sortBy].localeCompare(b[sortBy], { sensitivity: 'base' })
+          [...dataCopy].sort((a, b) =>
+            b[sortBy].localeCompare(a[sortBy], { sensitivity: 'base' })
           )
         );
       }
     } else if (column.type === 'number' || column.type === 'boolean') {
       setData(
-        dataCopy.sort((a, b) => {
+        [...dataCopy].sort((a, b) => 
           sortDirection === 'ASC'
-            ? a[column.value] - b[column.value]
-            : b[column.value] - a[column.value];
-        })
-      );
+            ? a[sortBy] - b[sortBy]
+            : b[sortBy] - a[sortBy]
+      ));
     }
   };
 
-  const searchFor = (title, value) => {
+  const searchFor =(title, value) =>{
+    console.log(value);
     const column = headersData.find((item) => item.value === title);
+    console.log(column);
     switch (column.type) {
       case 'boolean':
         setData(
-          dataCopy.filter((x) => Boolean(x[title]).toString().includes(value))
+          [...dataCopy].filter((x) =>
+            Boolean(x[title]).toString().includes(value)
+          )
         );
         break;
       case 'number':
         setData(
-          dataCopy.filter((x) => Number(x[title]).toString().includes(value))
+          [...dataCopy].filter((x) =>
+            Number(x[title]).toString().includes(value)
+          )
         );
         break;
       case 'string':
         setData(
-          dataCopy.filter((x) =>
+          [...dataCopy].filter((x) =>
             x[title].toUpperCase().includes(value.toUpperCase())
           )
         );
@@ -75,59 +83,32 @@ const useFilterEnhanced = ({ theme }) => {
         alert('invalid data type');
         break;
     }
-  };
+  }
 
-  const listTitles = headersData.map((item) => (
-    <th key={item.value} className="py-2.5 px-3.5">
-      <div className="flex justify-evenly">
-        <button onClick={() => handleSort(item.value, 'ASC')}>
-          <SortAscending size="20" />
-        </button>
-        <button onClick={() => handleSort(item.value, 'DESC')}>
-          <SortDescending size="20" />
-        </button>
-      </div>
-      <input
-        type="text"
-        placeholder={item.value}
-        className="focus:outline-none placeholder-gray-400 text-black text-center"
-        onChange={(e) => searchFor(item.value, e.target.value)}
-      />
-    </th>
-  ));
-
-  const Row = ({ index, style, data }) => {
+  const listTitles =  headersData.map((item) => {
     return (
-      <Tr style={style} key={index} theme={theme}>
-        {headersData.map((item) => (
-          <td key={data[index][item.value]}>
-            {typeof data[index][item.value] === 'boolean'
-              ? Boolean(data[index][item.value]).toString()
-              : data[index][item.value]}
-          </td>
-        ))}
-      </Tr>
-    );
-  };
+      <th key={item.value} scope="col" className="px-6 py-5 text-left text-xs font-medium tracking-wider">
+        <div className="flex justify-between items-center">
+          <SearchInput
+            theme={props.theme}
+            type="text"
+            placeholder={getUppercased(item.value)}
+            onChange={(e) => searchFor(item.value, e.target.value)}
+            // onChange={(e) => console.log(e.target.value)}
+          />
+          <div className="px-3">
+            <button onClick={() => handleSort(item.value, 'ASC')}>
+              <SortAscending size="20" />
+            </button>
+            <button onClick={() => handleSort(item.value, 'DESC')}>
+              <SortDescending size="20" />
+            </button>
+          </div>
+        </div>
+      </th>
+  )});
 
-  const TableDataView = () => (
-    <AutoSizer>
-      {({ height, width, sortDirection }) => (
-        <List
-          className="List"
-          itemSize={50}
-          width={810}
-          height={300}
-          itemData={tableData}
-          itemCount={tableData.length}
-        >
-          {Row}
-        </List>
-      )}
-    </AutoSizer>
-  );
-
-  return { listTitles, TableDataView };
+  return { listTitles,  headersData, tableData};
 };
 
 export default useFilterEnhanced;

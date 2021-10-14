@@ -1,13 +1,11 @@
-import DynamicTable from "../components/table/dynamicTable";
+import EnhancedDynamicTable from "../components/table/enhancedDynamicTable";
 
 export default function Tables() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <main>
-        {/* 3 possible themes: cyberpunk / dark / no theme (default) */}
-        <DynamicTable theme="cyberpunk">
-        </DynamicTable>
-      </main>
-    </div>
+    <main className="h-screen">
+      {/* 3 possible themes: cyberpunk / tailwind / dark / no theme (default) */}
+      <EnhancedDynamicTable theme="dark">
+      </EnhancedDynamicTable>
+    </main>
   )
 }
