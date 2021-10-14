@@ -1,4 +1,5 @@
-import { MockData } from '../../data/mock-data';
+// import { MockData } from '../../data/mock-data';
+import { MockData } from '../../data/generated';
 import { useState, useEffect } from 'react';
 import { SortAscending, SortDescending } from '@styled-icons/heroicons-solid';
 import SearchInput from '../style/searchInput.styled';
@@ -7,6 +8,8 @@ const useFilterEnhanced = (props) => {
   const [tableData, setData] = useState([]);
   const [dataCopy, setDataCopy] = useState([]);
   const [headersData, setHeadersData] = useState([]);
+
+  const getUppercased = (name) => name.toUpperCase();
 
   useEffect(() => {
     setData(MockData);
@@ -29,25 +32,24 @@ const useFilterEnhanced = (props) => {
     if (column.type === 'string') {
       if (sortDirection === 'ASC') {
         setData(
-          [...tableData].sort((a, b) =>
+          [...dataCopy].sort((a, b) =>
             a[sortBy].localeCompare(b[sortBy], { sensitivity: 'base' })
           )
         );
       } else {
         setData(
-          [...tableData].sort((a, b) =>
+          [...dataCopy].sort((a, b) =>
             b[sortBy].localeCompare(a[sortBy], { sensitivity: 'base' })
           )
         );
       }
     } else if (column.type === 'number' || column.type === 'boolean') {
       setData(
-        [...tableData].sort((a, b) => {
+        [...dataCopy].sort((a, b) => 
           sortDirection === 'ASC'
-            ? a[column.value] - b[column.value]
-            : b[column.value] - a[column.value];
-        })
-      );
+            ? a[sortBy] - b[sortBy]
+            : b[sortBy] - a[sortBy]
+      ));
     }
   };
 
@@ -83,8 +85,6 @@ const useFilterEnhanced = (props) => {
     }
   }
 
-  const getUppercased = (name) => name.toUpperCase();
-
   const listTitles =  headersData.map((item) => {
     return (
       <th key={item.value} scope="col" className="px-6 py-5 text-left text-xs font-medium tracking-wider">
@@ -112,54 +112,3 @@ const useFilterEnhanced = (props) => {
 };
 
 export default useFilterEnhanced;
-
-
-  // const searchInputs = headersData.map((item) => (
-  //   <div className="h-7">
-  //     <input
-  //       type="text"
-  //       placeholder={item.value}
-  //       className="focus:outline-none placeholder-gray-400 text-black text-center"
-  //       onChange={(e) => searchFor(item.value, e.target.value)}
-  //       // onChange={(e) => console.log(e.target.value)}
-  //     />
-  //   </div>
-  // ));
-
-  // const SearchFilter = () => (
-  //   <div clasName="flex flex-row justify-between">
-  //     {searchInputs}
-  //   </div>
-  // )
-  
-
-  // const Row = ({ index, style, data }) => {
-  //   return (
-  //     <Tr style={style} key={index} theme={theme}>
-  //       {headersData.map((item) => (
-  //         <td key={data[index][item.value]}>
-  //           {typeof data[index][item.value] === 'boolean'
-  //             ? Boolean(data[index][item.value]).toString()
-  //             : data[index][item.value]}
-  //         </td>
-  //       ))}
-  //     </Tr>
-  //   );
-  // };
-
-  // const TableDataView = () => (
-  //   <AutoSizer>
-  //     {({ height, width, sortDirection }) => (
-  //       <List
-  //         className="List"
-  //         itemSize={50}
-  //         width={width}
-  //         height={400}
-  //         itemData={tableData}
-  //         itemCount={tableData.length}
-  //       >
-  //         {Row}
-  //       </List>
-  //     )}
-  //   </AutoSizer>
-  // );

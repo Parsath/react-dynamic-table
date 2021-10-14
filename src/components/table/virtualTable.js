@@ -54,6 +54,7 @@ const Inner = React.forwardRef(
     return (
       <div {...rest} ref={ref}>
         <table className="table absolute min-w-full object-left border-collapse border-solid table-auto" style={{ top }}>
+          {console.log("ref \n"+ ref)}
           {header}
           <tbody className="">
             {children}

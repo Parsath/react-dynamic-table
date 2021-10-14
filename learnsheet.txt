@@ -156,15 +156,24 @@ Day 9: 14/10/2021           12h10
 
     STEP 11 IN PROGRESS
 
+    STEP 11 Completed
+
+    STEP 10 RESUMED
+
+    STEP 10 Completed
+
+    STEP 12:
+        -Fix number sorting problem
+
     Notes:
         *
 
     References:
         *
 
-WORKTIME:
+WORKTIME: 4H30M
 
-Stopping time: 14/10/2021   
+Stopping time: 14/10/2021   00h41
 
 
 
@@ -220,8 +229,20 @@ Stopping time: 14/10/2021
             DONE 11/10/2021
  
         -Style the tables using tailwind css (you can use the code in this link
-        https://tailwindui.com/components/application-ui/lists/tables) (First table)
+            NB: Please check : https://tailwindui.com/components/application-ui/lists/tables) (First table)
+        
+            DONE 14/10/2021
+ 
         -Fix dom problem with generic table
+  
+            DONE 14/10/2021
+ 
+        -Fix number sorting problem
+        
+            DONE 14/10/2021
+ 
+        -Fix Header twitching problem
+        -Make fixed Table height
         -Migrate the next project to typescript and transform all file to .tsx
         -READ ABOUT TREESHAKING
 

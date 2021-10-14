@@ -11,10 +11,10 @@ const GenericTable = (props) => {
         return (
             <Tr key={index} theme={props.theme}>
                 {headersData.map((item) => (
-                    <td key={data[index][item.value]} className="px-6 py-4 whitespace-nowrap">
-                    {typeof data[index][item.value] === 'boolean'
-                        ? Boolean(data[index][item.value]).toString()
-                        : data[index][item.value]}
+                    <td key={typeof data[index][item.value] === "number" ? (data[index][item.value] + Math.random * 100) : (data[index][item.value] + Number(Math.random * 100).toString()) } className="px-6 py-4 whitespace-nowrap">
+                        {typeof data[index][item.value] === 'boolean'
+                            ? Boolean(data[index][item.value]).toString()
+                            : data[index][item.value]}
                     </td>
                 ))}
             </Tr>
@@ -25,7 +25,6 @@ const GenericTable = (props) => {
         <AutoSizer>
         {({ height, width, sortDirection }) => (
             <VirtualTable
-            className="List"
             itemSize={36}
             width={width}
             height={height}
